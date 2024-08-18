@@ -19,6 +19,12 @@ public:
     friend ostream &operator<<(ostream &os, const LinkedList<U> &ll);
 
     void push_back(const T &data);
+
+    void push_front(const T &data);
+
+    T front();
+
+    T back();
 };
 
 

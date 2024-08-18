@@ -6,8 +6,5 @@ using namespace std;
 
 int main() {
     LinkedList<int> ll;
-    ll.push_back(1);
-    ll.push_back(2);
-
-    cout << ll << endl;
+    int frontData = ll.front();
 }
