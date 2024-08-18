@@ -1,11 +1,13 @@
-#include "lib/Node/Node.h"
-#include "lib/Node/Node.cpp"
 #include <iostream>
+#include "lib/LinkedList/LinkedList.h"
+#include "lib/LinkedList/LinkedList.cpp"
 
 using namespace std;
 
 int main() {
-    auto *a = new Node<int>(1, new Node<int>(2));
-    cout << *a << endl;
-    return 0;
+    LinkedList<int> ll;
+    ll.push_back(1);
+    ll.push_back(2);
+
+    cout << ll << endl;
 }

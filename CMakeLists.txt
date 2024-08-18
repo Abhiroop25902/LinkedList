@@ -4,6 +4,8 @@ project(BTree)
 set(CMAKE_CXX_STANDARD 26)
 
 add_executable(BTree src/main.cpp
-        src/lib/Node/Node.cpp
-        src/lib/Node/Node.h
+        src/lib/LinkedList/Node/Node.cpp
+        src/lib/LinkedList/Node/Node.h
+        src/lib/LinkedList/LinkedList.cpp
+        src/lib/LinkedList/LinkedList.h
 )

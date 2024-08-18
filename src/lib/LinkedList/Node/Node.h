@@ -15,10 +15,13 @@ class Node {
     Node *nextNode;
 
 public:
-    explicit Node(T const &data, Node<T> *nextNode = nullptr);
+    explicit Node(T const &data);
 
-    template<typename U>
-    friend ostream &operator<<(ostream &os, const Node<U> &node);
+    Node<T> *getNext();
+
+    void setNext(Node<T> *next);
+
+    T getData();
 };
 
 #endif //BTREE_FUNCTION_H
