@@ -109,8 +109,6 @@ TEST(LinkedListTest, ThrowErrorIfListEmptyAndBackCalled) {
                 throw e;
             }, out_of_range
     );
-
-
 }
 
 TEST(LinkedListTest, ListNotEmptyAndBackCalled) {
@@ -127,6 +125,188 @@ TEST(LinkedListTest, ListNotEmptyAndBackCalled) {
     auto actual = ll.back();
 
     EXPECT_EQ(expected, actual);
+}
+
+TEST(LinkedListTest, ListNotEmptyAndPopBackCalled) {
+    LinkedList<long> ll;
+    vector<long> numbers;
+    for (int i = 0; i < 5; i++) {
+        long randNum = random();
+
+        numbers.push_back(randNum);
+        ll.push_back(randNum);
+    }
+
+    ll.pop_back();
+    numbers.pop_back();
+
+    stringstream ssExpected;
+    for (auto e: numbers)
+        ssExpected << e << "->";
+    ssExpected << "NULL";
+
+    string expectedResult = ssExpected.str();
+
+    stringstream ssActual;
+    ssActual << ll;
+
+    string actualResult = ssActual.str();
+
+    EXPECT_EQ(expectedResult, actualResult);
+}
+
+TEST(LinkedListTest, ListEmptyAfterPopBackCalled) {
+    LinkedList<long> ll;
+    vector<long> numbers;
+
+    ll.push_back(random());
+    ll.pop_back();
+
+    string expectedResult = "NULL";
+
+    stringstream ssActual;
+    ssActual << ll;
+
+    string actualResult = ssActual.str();
+
+    EXPECT_EQ(expectedResult, actualResult);
+}
+
+TEST(LinkedListTest, ThrowErrorIfListEmptyAndPopBackCalled) {
+    LinkedList<long> ll;
+
+    EXPECT_THROW(
+            try {
+                ll.pop_back();
+                FAIL() << "expected length_error";
+            } catch (const out_of_range &e) {
+                string expectedErrorMsg = "Error: LinkedList is Empty";
+                string actualErrorMsg = e.what();
+
+                EXPECT_EQ(expectedErrorMsg, actualErrorMsg);
+                throw e;
+            }, length_error
+    );
+}
+
+TEST(LinkedListTest, ListNotEmptyAndPopFrontCalled) {
+    LinkedList<long> ll;
+    vector<long> numbers;
+    for (int i = 0; i < 5; i++) {
+        long randNum = random();
+
+        numbers.push_back(randNum);
+        ll.push_back(randNum);
+    }
+
+    ll.pop_front();
+    numbers.erase(numbers.begin());
+
+    stringstream ssExpected;
+    for (auto e: numbers)
+        ssExpected << e << "->";
+    ssExpected << "NULL";
+
+    string expectedResult = ssExpected.str();
+
+    stringstream ssActual;
+    ssActual << ll;
+
+    string actualResult = ssActual.str();
+
+    EXPECT_EQ(expectedResult, actualResult);
+}
+
+TEST(LinkedListTest, ListEmptyAfterPopFrontCalled) {
+    LinkedList<long> ll;
+    vector<long> numbers;
+
+    ll.push_back(random());
+    ll.pop_front();
+
+    string expectedResult = "NULL";
+
+    stringstream ssActual;
+    ssActual << ll;
+
+    string actualResult = ssActual.str();
+
+    EXPECT_EQ(expectedResult, actualResult);
+}
+
+TEST(LinkedListTest, ThrowErrorIfListEmptyAndPopFrontCalled) {
+    LinkedList<long> ll;
+
+    EXPECT_THROW(
+            try {
+                ll.pop_front();
+                FAIL() << "expected length_error";
+            } catch (const out_of_range &e) {
+                string expectedErrorMsg = "Error: LinkedList is Empty";
+                string actualErrorMsg = e.what();
+
+                EXPECT_EQ(expectedErrorMsg, actualErrorMsg);
+                throw e;
+            }, length_error
+    );
+}
+
+TEST(LinkedListTest, SizeTestPushBack) {
+    LinkedList<long> ll;
+    size_t expectedSize = 0;
+
+    for (int i = 0; i < 10; i++) {
+        ll.push_back(random());
+        expectedSize++;
+
+        EXPECT_EQ(ll.size(), expectedSize);
+    }
+}
+
+TEST(LinkedListTest, SizeTestPushFront) {
+    LinkedList<long> ll;
+    size_t expectedSize = 0;
+
+    for (int i = 0; i < 10; i++) {
+        ll.push_front(random());
+        expectedSize++;
+
+        EXPECT_EQ(ll.size(), expectedSize);
+    }
+}
+
+TEST(LinkedListTest, SizeTestPopBack) {
+    LinkedList<long> ll;
+    size_t expectedSize = 0;
+
+    for (int i = 0; i < 10; i++) {
+        ll.push_front(random());
+        expectedSize++;
+    }
+
+    for (int i = 0; i < 10; i++) {
+        ll.pop_back();
+        expectedSize--;
+
+        EXPECT_EQ(ll.size(), expectedSize);
+    }
+}
+
+TEST(LinkedListTest, SizeTestPopFront) {
+    LinkedList<long> ll;
+    size_t expectedSize = 0;
+
+    for (int i = 0; i < 10; i++) {
+        ll.push_front(random());
+        expectedSize++;
+    }
+
+    for (int i = 0; i < 10; i++) {
+        ll.pop_front();
+        expectedSize--;
+
+        EXPECT_EQ(ll.size(), expectedSize);
+    }
 }
 
 int main(int argc, char **argv) {

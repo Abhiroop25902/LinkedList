@@ -10,6 +10,7 @@
 template<typename T>
 class LinkedList {
     Node<T> *root;
+    size_t length;
 public:
     explicit LinkedList();
 
@@ -25,7 +26,13 @@ public:
     T front();
 
     T back();
-};
 
+    void pop_back();
+
+    void pop_front();
+
+    size_t size();
+
+};
 
 #endif //BTREE_LINKEDLIST_H

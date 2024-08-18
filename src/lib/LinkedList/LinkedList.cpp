@@ -3,7 +3,7 @@
 #include "Node/Node.cpp"
 
 template<typename T>
-LinkedList<T>::LinkedList(): root(nullptr) {}
+LinkedList<T>::LinkedList(): root(nullptr), length(0) {}
 
 template<typename T>
 LinkedList<T>::~LinkedList() {
@@ -22,6 +22,7 @@ void LinkedList<T>::push_back(const T &data) {
 
     if (this->root == nullptr) {
         this->root = dataNode;
+        this->length++;
         return;
     }
 
@@ -31,6 +32,8 @@ void LinkedList<T>::push_back(const T &data) {
         curr = curr->getNext();
 
     curr->setNext(dataNode);
+
+    this->length++;
 }
 
 template<typename T>
@@ -39,11 +42,14 @@ void LinkedList<T>::push_front(const T &data) {
 
     if (this->root == nullptr) {
         this->root = dataNode;
+        this->length++;
         return;
     }
 
     dataNode->setNext(this->root);
     this->root = dataNode;
+
+    this->length++;
 }
 
 template<typename T>
@@ -66,6 +72,55 @@ T LinkedList<T>::back() {
     }
 
     return curr->getData();
+}
+
+template<typename T>
+void LinkedList<T>::pop_back() {
+    if (this->root == nullptr)
+        throw length_error("Error: LinkedList is Empty");
+
+    if (this->root->getNext() == nullptr) {
+        delete this->root;
+        this->root = nullptr;
+        this->length--;
+        return;
+    }
+
+    Node<T> *curr = this->root;
+    Node<T> *back;
+
+    while (curr->getNext() != nullptr) {
+        back = curr;
+        curr = curr->getNext();
+    }
+
+    back->setNext(nullptr);
+    delete curr;
+
+    this->length--;
+}
+
+template<typename T>
+void LinkedList<T>::pop_front() {
+    if (this->root == nullptr)
+        throw length_error("Error: LinkedList is Empty");
+
+    if (this->root->getNext() == nullptr) {
+        delete this->root;
+        this->root = nullptr;
+        this->length--;
+        return;
+    }
+
+    Node<T> *curr = this->root;
+    this->root = this->root->getNext();
+    delete curr;
+    this->length--;
+}
+
+template<typename T>
+size_t LinkedList<T>::size() {
+    return length;
 }
 
 template<typename U>
