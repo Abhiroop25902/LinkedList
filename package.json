@@ -1,0 +1,13 @@
+{
+  "name": "btree",
+  "version": "1.0.0",
+  "description": "",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "cmake CMakeLists.txt && make && ./executeTests.out"
+  },
+  "author": "Abhiroop25902",
+  "license": "ISC"
+}
