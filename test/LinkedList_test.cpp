@@ -309,6 +309,37 @@ TEST(LinkedListTest, SizeTestPopFront) {
     }
 }
 
+TEST(LinkedListTest, FindGivesNullWhenLLEmpty) {
+    LinkedList<long> ll;
+    auto nodePtr = ll.find(1);
+
+    EXPECT_TRUE(nodePtr == nullptr);
+}
+
+TEST(LinkedListTest, FindGivesCorrectPtr) {
+    LinkedList<long> ll;
+    vector<long> generatedNumbers;
+
+    for (int i = 0; i < 10; i++) {
+        auto randomNumber = random();
+        ll.push_back(randomNumber);
+        generatedNumbers.push_back(randomNumber);
+    }
+
+    auto idx = random() % generatedNumbers.size();
+
+    auto expected = generatedNumbers[idx];
+
+    auto ptrIdx = ll.find(expected);
+
+    if (ptrIdx == nullptr) {
+        FAIL() << "ptrIdx should not be nullptr";
+    }
+
+    auto actual = ptrIdx->getData();
+    EXPECT_EQ(expected, actual);
+}
+
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

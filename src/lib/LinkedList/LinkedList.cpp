@@ -119,8 +119,20 @@ void LinkedList<T>::pop_front() {
 }
 
 template<typename T>
-size_t LinkedList<T>::size() {
-    return length;
+size_t LinkedList<T>::size() { return length; }
+
+template<typename T>
+Node<T> *LinkedList<T>::find(const T &data) {
+    Node<T> *curr = this->root;
+
+    while (curr != nullptr) {
+        if (curr->getData() == data) {
+            return curr;
+        }
+        curr = curr->getNext();
+    }
+
+    return nullptr;
 }
 
 template<typename U>

@@ -33,6 +33,7 @@ public:
 
     size_t size();
 
+    Node<T> *find(const T &data);
 };
 
 #endif //BTREE_LINKEDLIST_H
