@@ -6,7 +6,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "cmake CMakeLists.txt && make && ./executeTests.out"
+    "test": "cmake CMakeLists.txt && make && ./executeTests.out",
+    "run": "cmake CMakeLists.txt && make && ./BTree.out"
   },
   "author": "Abhiroop25902",
   "license": "ISC"
