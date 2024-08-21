@@ -12,7 +12,7 @@ add_executable(executeTests.out
         test/LinkedList_test.cpp)
 target_link_libraries(executeTests.out ${GTEST_LIBRARIES} pthread)
 
-add_executable(BTree.out
+add_executable(LinkedList.out
         src/main.cpp
         src/lib/LinkedList/Node/Node.cpp
         src/lib/LinkedList/Node/Node.h
